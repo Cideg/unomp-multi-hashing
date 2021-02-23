@@ -245,23 +245,25 @@ Handle<Value> yescrypt(const Arguments& args) {
 }
 
 Handle<Value> curvehash(const Arguments& args) {
-   HandleScope scope;
+    HandleScope scope;
 
     if (args.Length() < 1)
         return except("You must provide one argument.");
 
-   Local<Object> target = args[0]->ToObject();
+    Local<Object> target = args[0]->ToObject();
 
-   if(!Buffer::HasInstance(target))
-       return except("Argument should be a buffer object.");
+    if(!Buffer::HasInstance(target))
+        return except("Argument should be a buffer object.");
 
-   char * input = Buffer::Data(target);
-   char output[32];
+    char * input = Buffer::Data(target);
+    char output[32];
 
-   curve_hash(input, output);
+    uint32_t input_len = Buffer::Length(target);
 
-   Buffer* buff = Buffer::New(output, 32);
-   return scope.Close(buff->handle_);
+    curve_hash(input, output, input_len);
+
+    Buffer* buff = Buffer::New(output, 32);
+    return scope.Close(buff->handle_);
 }
 
 Handle<Value> keccak(const Arguments& args) {
