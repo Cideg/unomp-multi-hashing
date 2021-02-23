@@ -5,6 +5,7 @@
 
 extern "C" {
     #include "bcrypt.h"
+    #include "curvehash.h"
     #include "keccak.h"
     #include "quark.h"
     #include "scryptjane.h"
@@ -238,6 +239,26 @@ Handle<Value> yescrypt(const Arguments& args) {
    char output[32];
 
    yescrypt_hash(input, output);
+
+   Buffer* buff = Buffer::New(output, 32);
+   return scope.Close(buff->handle_);
+}
+
+Handle<Value> curvehash(const Arguments& args) {
+   HandleScope scope;
+
+    if (args.Length() < 1)
+        return except("You must provide one argument.");
+
+   Local<Object> target = args[0]->ToObject();
+
+   if(!Buffer::HasInstance(target))
+       return except("Argument should be a buffer object.");
+
+   char * input = Buffer::Data(target);
+   char output[32];
+
+   curve_hash(input, output);
 
    Buffer* buff = Buffer::New(output, 32);
    return scope.Close(buff->handle_);
@@ -779,6 +800,7 @@ Handle<Value> timetravel(const Arguments& args) {
 
 void init(Handle<Object> exports) {
     exports->Set(String::NewSymbol("quark"), FunctionTemplate::New(quark)->GetFunction());
+    exports->Set(String::NewSymbol("curvehash"), FunctionTemplate::New(curvehash)->GetFunction());
     exports->Set(String::NewSymbol("x11"), FunctionTemplate::New(x11)->GetFunction());
     exports->Set(String::NewSymbol("scrypt"), FunctionTemplate::New(scrypt)->GetFunction());
     exports->Set(String::NewSymbol("scryptn"), FunctionTemplate::New(scryptn)->GetFunction());
