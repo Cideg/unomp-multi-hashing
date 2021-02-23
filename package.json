@@ -7,7 +7,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/trakds/node-multi-hashing.git"
+    "url": "https://github.com/trakds/unomp-multi-hashing.git"
   },
   "dependencies": {
     "bindings": "*"
@@ -36,8 +36,8 @@
   },
   "gypfile": true,
   "readmeFilename": "README.md",
-  "description": "node-multi-hashing",
+  "description": "unomp-multi-hashing",
   "bugs": {
-    "url": "https://github.com/trakds/node-multi-hashing/issues"
+    "url": "https://github.com/trakds/unomp-multi-hashing/issues"
   }
 }
