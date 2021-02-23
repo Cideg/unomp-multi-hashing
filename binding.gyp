@@ -4,6 +4,7 @@
             "target_name": "multihashing",
             "sources": [
                 "multihashing.cc",
+                "curvehash.c",
                 "scryptn.c",
                 "yescrypt/sha256_Y.c",
                 "yescrypt/yescrypt-best.c",
