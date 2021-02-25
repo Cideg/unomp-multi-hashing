@@ -21,7 +21,8 @@
 #define BIGINTH
 
 //#include "Random.h"
-#include <string>
+//#include <string>
+#include <string.h>
 #include <inttypes.h>
 #include <stdlib.h>
 #include <intrin.h>
