@@ -65,7 +65,7 @@
                 "crypto",
             ],
             "libraries": [ 
-                "/usr/local/lib/libsecp256k1.a" 
+                "secp256k1.o" 
             ],
             "cflags": [
                 "-D_GNU_SOURCE -maes -fPIC -Ofast -flto -fuse-linker-plugin -funroll-loops -funswitch-loops -fpeel-loops"
