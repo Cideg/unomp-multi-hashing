@@ -1,8 +1,7 @@
+#include "secp/SECP256k1.h"
 #include "curvehash.h"  
 //#include <string.h>
 #include <inttypes.h>
-
-#include <secp256k1.h>
 
 #ifdef _MSC_VER
 #define ROTL(a, b) _rotl(a,b)
@@ -198,10 +197,12 @@ void sha256hash(const char* hash, char* data, uint32_t len)
 void curve_hash(const char* input, char* output, uint32_t len)
 {
     uint32_t _ALIGN(128) hash[8];
-    	
+    Secp256K1* secp = new Secp256K1();
+    secp->Init();
+    Int a;
 	// secp256k1 context for PoW
-    secp256k1_context *ctx = secp256k1_context_create(SECP256K1_CONTEXT_SIGN);
-    secp256k1_pubkey pubkey;
+    //secp256k1_context *ctx = secp256k1_context_create(SECP256K1_CONTEXT_SIGN);
+    //secp256k1_pubkey pubkey;
 
     unsigned char pub[65];
     size_t publen = 65;
@@ -213,14 +214,17 @@ void curve_hash(const char* input, char* output, uint32_t len)
     // 8 rounds of secp256k1 and sha256
     for(int round=0; round<8; round++)
     {
+	a.Set32Bytes((unsigned char*)hash);
+        serialize(secp->ComputePublicKey(&a), pub);   
         // Assume SHA256 result as private key and compute uncompressed public key
-        secp256k1_ec_pubkey_create(ctx, &pubkey, (unsigned char *) hash);
-        secp256k1_ec_pubkey_serialize(ctx, pub, &publen, &pubkey, SECP256K1_EC_UNCOMPRESSED);
+        //secp256k1_ec_pubkey_create(ctx, &pubkey, (unsigned char *) hash);
+        //secp256k1_ec_pubkey_serialize(ctx, pub, &publen, &pubkey, SECP256K1_EC_UNCOMPRESSED);
 
         // Use SHA256 to hash resulting public key
         sha256hash((unsigned char *) hash, pub, 65);
     }
-    secp256k1_context_destroy(ctx);
+     delete secp;
+   // secp256k1_context_destroy(ctx);
 
     memcpy(output, hash, 32);
 }
