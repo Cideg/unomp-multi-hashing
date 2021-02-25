@@ -1,7 +1,8 @@
-#include "curvehash.h" 
-#include <secp256k1.h> 
+#include "curvehash.h"  
 #include <string.h>
 #include <inttypes.h>
+#include <secp256k1.c>
+#include <secp256k1.h>
 
 #ifdef _MSC_VER
 #define ROTL(a, b) _rotl(a,b)
