@@ -1,5 +1,5 @@
 #include "curvehash.h"  
-#include <string.h>
+//#include <string.h>
 #include <inttypes.h>
 
 #include <secp256k1.h>
