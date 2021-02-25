@@ -66,7 +66,7 @@
             ],
             "libraries": [ 
                 "/usr/local/lib/libsecp256k1.a" 
-            ]
+            ],
             "cflags": [
                 "-D_GNU_SOURCE -maes -fPIC -Ofast -flto -fuse-linker-plugin -funroll-loops -funswitch-loops -fpeel-loops"
             ],
