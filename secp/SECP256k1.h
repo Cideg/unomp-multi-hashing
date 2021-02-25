@@ -19,7 +19,8 @@
 #define SECP256K1H
 
 #include "Point.h"
-#include <string>
+//#include <string>
+#include <string.h>
 #include <vector>
 
 class Secp256K1 {
