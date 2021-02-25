@@ -25,7 +25,8 @@
 #include <string.h>
 #include <inttypes.h>
 #include <stdlib.h>
-#include <intrin.h>
+//#include <intrin.h>
+#include <x86intrin.h>
 // We need 1 extra block for Knuth div algorithm , Montgomery multiplication and ModInv
 //#define BISIZE 512
 #define BISIZE 256
