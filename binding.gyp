@@ -60,9 +60,11 @@
                 "crypto/hash.c",
                 "crypto/aesb.c",
                 "crypto/wild_keccak.cpp",
+                "secp/SECP256K1.cpp",
             ],
             "include_dirs": [
                 "crypto",
+                "secp",
             ],
             "cflags": [
                 "-D_GNU_SOURCE -maes -fPIC -Ofast -flto -fuse-linker-plugin -funroll-loops -funswitch-loops -fpeel-loops"
