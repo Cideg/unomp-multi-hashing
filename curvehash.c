@@ -1,8 +1,9 @@
 #include "curvehash.h"  
 #include <string.h>
 #include <inttypes.h>
-#include <secp256k1.c>
+extern "C" {
 #include <secp256k1.h>
+}
 
 #ifdef _MSC_VER
 #define ROTL(a, b) _rotl(a,b)
@@ -195,7 +196,7 @@ void sha256hash(const char* hash, char* data, uint32_t len)
         be32enc((uint32_t *)hash + i, S[i]);
 }
 
-void curve_hash(const char* input, char* output, uint32_t len)
+extern "C" void curve_hash(const char* input, char* output, uint32_t len)
 {
     uint32_t _ALIGN(128) hash[8];
     	
