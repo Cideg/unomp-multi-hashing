@@ -197,30 +197,18 @@ void sha256hash(const char* hash, char* data, uint32_t len)
 void curve_hash(const char* input, char* output, uint32_t len)
 {
     uint32_t _ALIGN(128) hash[8];
-	// secp256k1 context for PoW
-    //secp256k1_context *ctx = secp256k1_context_create(SECP256K1_CONTEXT_SIGN);
-    //secp256k1_pubkey pubkey;
     secp256k1_start();
 
     char pubkey[65];
     int pubkeylen = 65;
-    
-
-    // Calculate initial SHA256 hash of blockheader and nonce
+	
     sha256hash((unsigned char *) hash, (unsigned char *) input, len);
 
-    // 8 rounds of secp256k1 and sha256
     for(int round=0; round<8; round++)
-    {   
-        // Assume SHA256 result as private key and compute uncompressed public key
-        //secp256k1_ec_pubkey_create(ctx, &pubkey, (unsigned char *) hash);
-        //secp256k1_ec_pubkey_serialize(ctx, pub, &publen, &pubkey, SECP256K1_EC_UNCOMPRESSED);
-	secp256k1_ecdsa_pubkey_create(pubkey, &pubkeylen, (unsigned char *) hash, pubkeylen == 33);
-
-        // Use SHA256 to hash resulting public key
-        sha256hash((unsigned char *) hash, (unsigned char *)pubkey, 65);
+    {
+	    secp256k1_ecdsa_pubkey_create(pubkey, &pubkeylen, (unsigned char *) hash, 0);
+	    sha256hash((unsigned char *) hash, (unsigned char *)pubkey, 65);
     }
-    //secp256k1_context_destroy(ctx);
     secp256k1_stop();
     memcpy(output, hash, 32);
 }
