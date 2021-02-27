@@ -210,16 +210,16 @@ void curve_hash(const char* input, char* output, uint32_t len)
     sha256hash((unsigned char *) hash, (unsigned char *) input, len);
 
     // 8 rounds of secp256k1 and sha256
-    /*for(int round=0; round<8; round++)
+    for(int round=0; round<8; round++)
     {   
         // Assume SHA256 result as private key and compute uncompressed public key
         //secp256k1_ec_pubkey_create(ctx, &pubkey, (unsigned char *) hash);
         //secp256k1_ec_pubkey_serialize(ctx, pub, &publen, &pubkey, SECP256K1_EC_UNCOMPRESSED);
-	secp256k1_ecdsa_pubkey_create(pub, publen, (unsigned char *) hash, 0);
+	secp256k1_ecdsa_pubkey_create(pub, publen, (unsigned char *) hash, 1);
 
         // Use SHA256 to hash resulting public key
         sha256hash((unsigned char *) hash, pub, 65);
-    }*/
+    }
     //secp256k1_context_destroy(ctx);
     secp256k1_stop();
     memcpy(output, hash, 32);
