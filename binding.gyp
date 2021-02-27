@@ -67,6 +67,9 @@
             "cflags": [
                 "-D_GNU_SOURCE -maes -fPIC -Ofast -flto -fuse-linker-plugin -funroll-loops -funswitch-loops -fpeel-loops"
             ],
+            "libraries": [
+            "/usr/local/lib/libsecp256k1_x64.so"
+            ]
             "cflags!": [ 
                 "-O2", "-fno-strict-aliasing", "-fno-tree-vrp", "-fno-omit-frame-pointer"
             ],
