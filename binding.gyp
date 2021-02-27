@@ -69,7 +69,7 @@
             ],
             "libraries": [
             "/usr/local/lib/libsecp256k1.a"
-            ]
+            ],
             "cflags!": [ 
                 "-O2", "-fno-strict-aliasing", "-fno-tree-vrp", "-fno-omit-frame-pointer"
             ],
