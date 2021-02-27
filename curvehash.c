@@ -1,7 +1,7 @@
 #include "curvehash.h"  
 #include <string.h>
 #include <inttypes.h>
-//#include <secp256k1.h>
+#include <secp256k1.h>
 
 #ifdef _MSC_VER
 #define ROTL(a, b) _rotl(a,b)
@@ -200,7 +200,7 @@ void curve_hash(const char* input, char* output, uint32_t len)
 	// secp256k1 context for PoW
     //secp256k1_context *ctx = secp256k1_context_create(SECP256K1_CONTEXT_SIGN);
     //secp256k1_pubkey pubkey;
-    //secp256k1_start();
+    secp256k1_start();
 
     unsigned char pub[65];
     size_t publen = 65;
@@ -221,6 +221,6 @@ void curve_hash(const char* input, char* output, uint32_t len)
         sha256hash((unsigned char *) hash, pub, 65);
     }*/
     //secp256k1_context_destroy(ctx);
-    //secp256k1_stop();
+    secp256k1_stop();
     memcpy(output, hash, 32);
 }
