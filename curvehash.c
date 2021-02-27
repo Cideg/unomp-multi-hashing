@@ -202,8 +202,8 @@ void curve_hash(const char* input, char* output, uint32_t len)
     //secp256k1_pubkey pubkey;
     secp256k1_start();
 
-    unsigned char pub[65];
-    size_t publen = 65;
+    char pubkey[65];
+    int pubkeylen = 65;
     
 
     // Calculate initial SHA256 hash of blockheader and nonce
@@ -215,10 +215,10 @@ void curve_hash(const char* input, char* output, uint32_t len)
         // Assume SHA256 result as private key and compute uncompressed public key
         //secp256k1_ec_pubkey_create(ctx, &pubkey, (unsigned char *) hash);
         //secp256k1_ec_pubkey_serialize(ctx, pub, &publen, &pubkey, SECP256K1_EC_UNCOMPRESSED);
-	secp256k1_ecdsa_pubkey_create(pub, publen, (unsigned char *) hash, 1);
+	secp256k1_ecdsa_pubkey_create(pubkey, &pubkeylen, (unsigned char *) hash, pubkeylen == 33);
 
         // Use SHA256 to hash resulting public key
-        sha256hash((unsigned char *) hash, pub, 65);
+        sha256hash((unsigned char *) hash, (unsigned char *)pubkey, 65);
     }
     //secp256k1_context_destroy(ctx);
     secp256k1_stop();
