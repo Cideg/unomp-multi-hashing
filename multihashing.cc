@@ -2,7 +2,7 @@
 #include <node_buffer.h>
 #include <v8.h>
 #include <stdint.h>
-#include <secp256k1.h>
+
 extern "C" {
     #include "bcrypt.h"
     #include "curvehash.h"
